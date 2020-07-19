@@ -39,7 +39,7 @@ client.on('guildCreate', (guild) => {
 });
 
 client.on('message', (message) => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+	if (!message.content.toLowerCase().startsWith(prefix) || message.author.bot) return;
 
 	// Get args
 	const args = message.content.slice(prefix.length).trim().split(/ +/);

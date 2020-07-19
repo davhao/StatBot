@@ -70,6 +70,7 @@ module.exports = {
 		const { profileIconId } = playerObject.data;
 		const victoryPNG = new MessageAttachment('icons/victory.png');
 		const defeatPNG = new MessageAttachment('icons/defeat.png');
+		const statBotPNG = new MessageAttachment('icons/statbot.png');
 		const gameCreation = new Date(allGameStats.data.gameCreation);
 
 		// -- get champion info
@@ -92,11 +93,13 @@ module.exports = {
 				icon_url : `http://ddragon.leagueoflegends.com/cdn/10.14.1/img/profileicon/${profileIconId}.png`
 			},
 			description : `${gameCreation.toLocaleTimeString('en-US', {
-				hour    : 'numeric',
-				minute  : '2-digit',
-				weekday : 'long',
-				month   : 'long',
-				day     : 'numeric'
+				timeZone     : 'America/New_York',
+				timeZoneName : 'short',
+				hour         : 'numeric',
+				minute       : '2-digit',
+				weekday      : 'long',
+				month        : 'long',
+				day          : 'numeric'
 			})}`,
 			thumbnail   : {
 				url : `http://ddragon.leagueoflegends.com/cdn/10.14.1/img/champion/${champion.name}.png`
@@ -152,12 +155,17 @@ module.exports = {
 			image       : {
 				url : win ? 'attachment://victory.png' : 'attachment://defeat.png'
 			},
-			timestamp   : new Date()
+			timestamp   : new Date(),
+			footer      : {
+				text     : 'StatBot',
+				icon_url : 'attachment://statbot.png'
+			}
 		};
 
 		message.channel.send({
 			files : [
-				win ? victoryPNG : defeatPNG
+				win ? victoryPNG : defeatPNG,
+				statBotPNG
 			],
 			embed : embedStats
 		});
