@@ -22,13 +22,22 @@ for (const file of commandFiles) {
 const cooldowns = new Discord.Collection();
 
 client.once('ready', () => {
-	console.log('Ready!\n');
+	console.log('Ready!');
 });
 
-client.on('guildMemberAdd', (member) => {
-	member.guild.channels
-		.get('channelID')
-		.send(`Hello! I'm StatBot. To access my list of commands, send \`stats help\`.`);
+client.on('guildCreate', (guild) => {
+	let channelID;
+	let channels = guild.channels;
+	channelLoop: for (let c of channels) {
+		let channelType = c[1].type;
+		if (channelType === 'text') {
+			channelID = c[0];
+			break channelLoop;
+		}
+	}
+
+	let channel = bot.channels.get(guild.systemChannelID || channelID);
+	channel.send(`Hello! I'm StatBot. To access my list of commands, send \`stats help\`.`);
 });
 
 client.on('message', (message) => {
