@@ -26,18 +26,16 @@ client.once('ready', () => {
 });
 
 client.on('guildCreate', (guild) => {
-	let channelID;
-	let channels = guild.channels;
-	channelLoop: for (let c of channels) {
-		let channelType = c[1].type;
-		if (channelType === 'text') {
-			channelID = c[0];
-			break channelLoop;
+	let defaultChannel = '';
+	guild.channels.cache.forEach((channel) => {
+		if (channel.type == 'text' && defaultChannel == '') {
+			if (channel.permissionsFor(guild.me).has('SEND_MESSAGES')) {
+				defaultChannel = channel;
+			}
 		}
-	}
-
-	let channel = bot.channels.get(guild.systemChannelID || channelID);
-	channel.send(`Hello! I'm StatBot. To access my list of commands, send \`stats help\`.`);
+	});
+	//defaultChannel will be the channel object that the bot first finds permissions for
+	defaultChannel.send(`Hello! I'm StatBot. To access my list of commands, send \`stats help\`.`);
 });
 
 client.on('message', (message) => {
