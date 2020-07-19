@@ -25,6 +25,12 @@ client.once('ready', () => {
 	console.log('Ready!\n');
 });
 
+client.on('guildMemberAdd', (member) => {
+	member.guild.channels
+		.get('channelID')
+		.send(`Hello! I'm StatBot. To access my list of commands, send \`stats help\`.`);
+});
+
 client.on('message', (message) => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
