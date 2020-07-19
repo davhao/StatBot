@@ -1,6 +1,6 @@
 const { MessageAttachment } = require('discord.js');
 const axios = require('axios');
-const { riotToken } = require('../config.json');
+const { riotToken } = require('../config.js');
 
 module.exports = {
 	name        : 'last',
