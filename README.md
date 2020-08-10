@@ -14,13 +14,8 @@ boast in their Discord chat servers about a stellar (or not so stellar) performa
 
 ## Demo
 <p align="center">
-  <img src="/icons/statbot-demo" width="500">
+  <img src="/icons/statbot-demo.gif" width="500">
 </p>
 
 ## Tech
-This project was built with the MERN stack.
-
-  **Fontend**: HTML, CSS, Javascript, React.js  
-  **Backend**: MongoDB, Express.js, Node.js
-
-Both the frontend and backend are hosted on Heroku.
+This project was built with Node.js and the [Discord.js](https://github.com/discordjs) Node Module and is hosted on Heroku.
